@@ -59,7 +59,8 @@ fn groth16_proof_wrong_input() -> Result<()> {
 
     let circom = builder.build().unwrap();
 
-    // we need to manually specify the public input, else the circuit builder will take the default for b = 0, and set public input to 0 (=11*0).
+    // we need to manually specify the public input, else the circuit builder will
+    // take the default for b = 0, and set public input to 0 (=11*0).
     let inputs = vec![Fr::from(33u64)];
 
     let proof = GrothBn::prove(&params, circom, &mut rng).unwrap();

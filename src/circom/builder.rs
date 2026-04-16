@@ -54,8 +54,8 @@ impl<F: PrimeField> CircomConfig<F> {
 }
 
 impl<F: PrimeField> CircomBuilder<F> {
-    /// Instantiates a new builder using the provided WitnessGenerator and R1CS files
-    /// for your circuit
+    /// Instantiates a new builder using the provided WitnessGenerator and R1CS
+    /// files for your circuit
     pub fn new(cfg: CircomConfig<F>) -> Self {
         Self {
             cfg,
@@ -68,6 +68,7 @@ impl<F: PrimeField> CircomBuilder<F> {
         let values = self.inputs.entry(name.to_string()).or_default();
         values.push(val.into());
     }
+
     // Loads the input.json file from the specified path
     pub fn load_input_json<P: AsRef<Path>>(&mut self, path: P) -> Result<()> {
         let file = File::open(path)?;
@@ -107,8 +108,8 @@ impl<F: PrimeField> CircomBuilder<F> {
         circom
     }
 
-    /// Creates the circuit populated with the witness corresponding to the previously
-    /// provided inputs
+    /// Creates the circuit populated with the witness corresponding to the
+    /// previously provided inputs
     pub fn build(mut self) -> Result<CircomCircuit<F>> {
         let mut circom = self.setup();
 

@@ -320,7 +320,8 @@ fn deserialize_field_fr<R: Read>(reader: &mut R) -> IoResult<Fr> {
     Ok(Fr::new_unchecked(Fr::new_unchecked(bigint).into_bigint()))
 }
 
-// skips the multiplication by R because Circom points are already in Montgomery form
+// skips the multiplication by R because Circom points are already in Montgomery
+// form
 fn deserialize_field<R: Read>(reader: &mut R) -> IoResult<Fq> {
     let bigint = BigInteger256::deserialize_uncompressed(reader)?;
     // if you use Fq::new it multiplies by R
@@ -373,9 +374,7 @@ mod tests {
     use std::fs::File;
     use wasmer::Store;
 
-    use crate::circom::CircomReduction;
-    use crate::witness::WitnessCalculator;
-    use crate::{CircomBuilder, CircomConfig};
+    use crate::{CircomBuilder, CircomConfig, circom::CircomReduction, witness::WitnessCalculator};
     use ark_groth16::Groth16;
     use ark_std::rand::thread_rng;
     use num_traits::{One, Zero};

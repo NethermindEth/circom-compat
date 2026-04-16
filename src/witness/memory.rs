@@ -1,19 +1,18 @@
-//! Safe-ish interface for reading and writing specific types to the WASM runtime's memory
+//! Safe-ish interface for reading and writing specific types to the WASM
+//! runtime's memory
 use ark_serialize::CanonicalDeserialize;
 use num_traits::ToPrimitive;
 use wasmer::{Memory, MemoryAccessError, MemoryView, Store};
 
-// TODO: Decide whether we want Ark here or if it should use a generic BigInt package
+// TODO: Decide whether we want Ark here or if it should use a generic BigInt
+// package
 use ark_bn254::FrConfig;
-use ark_ff::MontConfig;
-use ark_ff::{BigInteger, BigInteger256, Zero};
+use ark_ff::{BigInteger, BigInteger256, MontConfig, Zero};
 
 use num_bigint::{BigInt, BigUint};
 
 use color_eyre::Result;
-use std::io::Cursor;
-use std::str::FromStr;
-use std::{convert::TryFrom, ops::Deref};
+use std::{convert::TryFrom, io::Cursor, ops::Deref, str::FromStr};
 
 #[derive(Debug)]
 pub struct SafeMemory {
@@ -207,8 +206,8 @@ impl SafeMemory {
 }
 
 // TODO: Figure out how to read / write numbers > u32
-// circom-witness-calculator: Wasm + Memory -> expose BigInts so that they can be consumed by any proof system
-// ark-circom:
+// circom-witness-calculator: Wasm + Memory -> expose BigInts so that they can
+// be consumed by any proof system ark-circom:
 // 1. can read zkey
 // 2. can generate witness from inputs
 // 3. can generate proofs

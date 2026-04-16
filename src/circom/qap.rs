@@ -1,14 +1,14 @@
 use ark_ff::PrimeField;
 use ark_groth16::r1cs_to_qap::{LibsnarkReduction, R1CSToQAP, evaluate_constraint};
 use ark_poly::EvaluationDomain;
-use ark_relations::gr1cs::ConstraintSystemRef;
-use ark_relations::gr1cs::SynthesisError;
+use ark_relations::gr1cs::{ConstraintSystemRef, SynthesisError};
 use ark_std::vec;
 use rayon::prelude::*;
-/// Implements the witness map used by snarkjs. The arkworks witness map calculates the
-/// coefficients of H through computing (AB-C)/Z in the evaluation domain and going back to the
-/// coefficients domain. snarkjs instead precomputes the Lagrange form of the powers of tau bases
-/// in a domain twice as large and the witness map is computed as the odd coefficients of (AB-C)
+/// Implements the witness map used by snarkjs. The arkworks witness map
+/// calculates the coefficients of H through computing (AB-C)/Z in the
+/// evaluation domain and going back to the coefficients domain. snarkjs instead
+/// precomputes the Lagrange form of the powers of tau bases in a domain twice
+/// as large and the witness map is computed as the odd coefficients of (AB-C)
 /// in that domain. This serves as HZ when computing the C proof element.
 pub struct CircomReduction;
 
@@ -96,7 +96,8 @@ impl R1CSToQAP for CircomReduction {
         _: F,
         delta_inverse: F,
     ) -> Result<Vec<F>, SynthesisError> {
-        // the usual H query has domain-1 powers. Z has domain powers. So HZ has 2*domain-1 powers.
+        // the usual H query has domain-1 powers. Z has domain powers. So HZ has
+        // 2*domain-1 powers.
         let mut scalars = (0..2 * max_power + 1)
             .into_par_iter()
             .map(|i| delta_inverse * t.pow([i as u64]))
