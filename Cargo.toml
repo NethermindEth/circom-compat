@@ -8,9 +8,6 @@ repository = "https://github.com/arkworks-rs/circom-compat"
 license = "MIT OR Apache-2.0"
 resolver = "2"
 
-[lib]
-crate-type = ["cdylib", "rlib"]
-
 # WASM operations
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 wasmer = { version = "6.1.0-rc.3", default-features = false, features = ["default"] }
@@ -25,12 +22,12 @@ num-bigint = { version = "0.4.3", default-features = false, features = [ "rand" 
 
 # ZKP Generation
 ark-crypto-primitives = { git = "https://github.com/arkworks-rs/crypto-primitives.git" }
-ark-ff = { version = "0.5.0", default-features = false, features = [ "parallel", "asm" ] }
-ark-ec = { version = "0.5.0", default-features = false, features = [ "parallel" ] }
-ark-std = { version = "0.5.0", default-features = false, features = [ "parallel" ] }
+ark-ff = { version = "0.5.0", default-features = false }
+ark-ec = { version = "0.5.0", default-features = false}
+ark-std = { version = "0.5.0", default-features = false }
 ark-bn254 = { version = "0.5.0" }
-ark-groth16 = { git = "https://github.com/arkworks-rs/groth16.git", default-features = false, features = [ "parallel" ] }
-ark-poly = { version = "0.5.0", default-features = false, features = [ "parallel" ] }
+ark-groth16 = { git = "https://github.com/arkworks-rs/groth16.git", default-features = false }
+ark-poly = { version = "0.5.0", default-features = false }
 ark-relations = { git = "https://github.com/arkworks-rs/snark.git", default-features = false }
 ark-serialize = { version = "0.5.0", default-features = false }
 rayon = { version = "1.5.0" }
@@ -70,15 +67,3 @@ harness = false
 default = ["ethereum"]
 bench-complex-all = []
 ethereum = ["ethers-core"]
-
-
-[patch.crates-io]
-ark-relations = { git = "https://github.com/arkworks-rs/snark.git" }
-ark-crypto-primitives = { git = "https://github.com/arkworks-rs/crypto-primitives.git" }
-ark-ff = { git = "https://github.com/arkworks-rs/algebra.git" }
-ark-ec = { git = "https://github.com/arkworks-rs/algebra.git" }
-ark-poly = { git = "https://github.com/arkworks-rs/algebra.git" }
-ark-serialize = { git = "https://github.com/arkworks-rs/algebra.git" }
-ark-bn254 = { git = "https://github.com/arkworks-rs/algebra.git" }
-ark-r1cs-std = { git = "https://github.com/arkworks-rs/r1cs-std.git" }
-ark-groth16 = { git = "https://github.com/arkworks-rs/groth16.git" }
