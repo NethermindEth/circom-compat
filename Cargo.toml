@@ -10,7 +10,7 @@ resolver = "2"
 
 # WASM operations
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-wasmer = { version = "7.1", default-features = false, features = ["singlepass"] }
+wasmer = { version = "7.1", default-features = false, features = ["wasmi"] }
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wasmer = { version = "7.1", default-features = false, features = ["js", "js-default"] }
 
@@ -58,3 +58,11 @@ harness = false
 [features]
 default = []
 bench-complex-all = []
+parallel = [
+    "ark-crypto-primitives/parallel",
+    "ark-ff/parallel",
+    "ark-ec/parallel",
+    "ark-std/parallel",
+    "ark-groth16/parallel",
+    "ark-poly/parallel",
+]
